@@ -2,10 +2,8 @@
 
 ssize_t _getline()
 {
-/*** Buffer to read the command line into ***/
 	char cmdline[1024] = {'\0'};
 
-/*** Stores the commandlines ***/
 	static char *cmdlines[64] = {NULL}; 
 
 	ssize_t len; 
