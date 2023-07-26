@@ -23,4 +23,16 @@ ssize_t _getline()
 		exit(errno);
 		}
 		/*** Get all commandfiles fron the command ***/
-		file = 
+		file = strtok_r(cmdfile, "\n");
+	}
+
+	cur_cmdfile - cmdfiles[0];
+	a = 0;
+
+	while (cmdfiles[a] != NULL)
+		cmdfiles[a] = cmdfiles[a + 1];
+
+	if (cur_cmdfile)
+		return strlen(cur_cmdfile);
+	return (0);
+}
