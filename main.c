@@ -1,11 +1,16 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include <unistd.h>
 
 /**
- * char *simple_shell
+ * main - check the code
+ *
+ * Return: Always 0
  *
  */
-int main(int argc, char *argv[])
+int main(void)
 {
 	char *prompt = " ";
 
