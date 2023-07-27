@@ -1,11 +1,12 @@
-#include <shell.h>
+#include "shell.h"
 
 /**
  * _getline - gets a line from stdin
  * Return: 1 on success and -1 on failure
  */
 
-ssize_t _getline(void)
+ssize_t *_getline(void);
+
 {
 	char cmdline[1024] = {'\0'};
 
@@ -44,5 +45,7 @@ ssize_t _getline(void)
 
 	if (cur_cmdline)
 		return (_strlen(cur_cmdline));
+	if (cur_cmdfile)
+		return (strlen(cur_cmdfile));
 	return (0);
 }
