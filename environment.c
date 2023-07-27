@@ -9,19 +9,13 @@
 
 char *_getenv(const char *key)
 {
-	char **environ;
-	size_t key_len;
+	int i;
 
-	if (key == NULL || *key == '\0')
-		return (NULL);
-
-	key_len = _strlen(key);
-
-	for (char **env = environ; *env != NULL; ++env)
+	for (i = 0; environ[i]; i++)
 	{
-		if (_strcmp(*env, key, key_len) == 0 && (*env)[key_len] == '=')
+		if (_strcmp(environ[i], key, _strlen(key)) == 0)
 		{
-			return (*env + key_len + 1);
+			return (environ[i]);
 		}
 	}
 
