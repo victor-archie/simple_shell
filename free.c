@@ -1,4 +1,4 @@
-#incllude "shell.h"
+#include "shell.h"
 
 /**
  * free - frees the memory space pointed to by ptr
@@ -6,11 +6,11 @@
  *
  * Return 0 (void)
  */
-void free(void *ptr)
+void free_pointers_array(char **ptr)
 {
-	int i = 0;
+	int p = 0;
 
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	while (ptr[i])
+		free(ptr[i++]);
+	free(ptr);
 }

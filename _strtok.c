@@ -7,7 +7,7 @@
  * Return: pointer to the next token or NULL
  */
 
-char *_strtok(char *str, char *delim);
+char *_strtok(char *str, char *delim)
 {
 	static char *f;
 	int a;

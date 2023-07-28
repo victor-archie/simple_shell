@@ -26,7 +26,7 @@ char *num_to_str(int n)
 	for (i = 0; n; i++)
 	{
 		str[i] = '0' + (n % 10);
-		num /= 10;
+		n /= 10;
 	}
 	str[i] = '\0';
 
@@ -34,7 +34,7 @@ char *num_to_str(int n)
 	length = _strlen(str);
 
 	for (i = 0; --length >= 0; ++i)
-		str[i] = dup[len];
+		str[i] = dup[length];
 	free(dup);
 	return (str);
 }
@@ -72,8 +72,7 @@ void print_error_message(void)
 	print_error(": ");
 
 	if (errno == 126 || errno == 127)
-		print_error(errno == 127 ? "not found\n" : "
-				Permission denied\n");
+		print_error(errno == 127 ? "not found\n" : "Permission denied\n");
 	if (_strcmp(tokens[0], "cd") == 0)
 	{
 		print_error("can't cd to ");

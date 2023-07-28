@@ -5,8 +5,7 @@
  * Return: 1 on success and -1 on failure
  */
 
-ssize_t *_getline(void);
-
+ssize_t _getline(void);
 {
 	char cmdline[1024] = {'\0'};
 

@@ -9,9 +9,9 @@
  * Return: pointer to dest
  */
 
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *dest, const char *src)
 {
-	int i, len = 0;
+	int i = 0, len = 0;
 
 	while (src[len] != '\0')
 	{
@@ -30,7 +30,7 @@ char *_strcpy(char *dest, char *src)
  * Return: pointer to resulting string `dest`
  */
 
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, const char *src)
 {
 	int i, j;
 
@@ -53,7 +53,7 @@ char *_strcat(char *dest, char *src)
  * Return: length of string
  */
 
-size_t _strlen(char *string)
+size_t _strlen(const char *string)
 {
 	int i = 0;
 
@@ -95,7 +95,7 @@ char *_strdup(const char *str)
  * Return: negative int if s1 < s2, 0 if matching, and positive int if s1 > s2
  */
 
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 	int i;
 

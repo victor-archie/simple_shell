@@ -7,7 +7,7 @@
 
 int builtin_exit(void)
 {
-	int stat = 0;
+	int i, stat = 0;
 
 	if (tokens[i] != NULL)
 		stat = _atoi(tokens[1]);
@@ -74,18 +74,20 @@ int builtin_cd(void)
 
 int is_builtin(void)
 {
-	builtin_action actions[] = {{"exit", builtin_exit}
-					{"env", builtin_env}
-					{"cd", builtin_cd}
+	builtin_action actions[] = {
+		{"exit", builtin_exit},
+		{"env", builtin_env},
+		{"cd", builtin_cd},
 
-					{NULL, NULL}};
+		{NULL, NULL}};
+
 	int j;
 
-	for (j = 0; actions[i].name; j++)
+	for (j = 0; actions[j].name; j++)
 	{
-		if (_strcmp(actions[i].name, tokens[0]) == 0)
+		if (_strcmp(actions[j].name, tokens[0]) == 0)
 		{
-			return (actions[i].actions());
+			return (actions[j].actions());
 		}
 	}
 
