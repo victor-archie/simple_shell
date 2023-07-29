@@ -11,7 +11,7 @@
 void num_to_string(long num, char *str, int base)
 {
 	int idx = 0, inNegative = 0;
-	long x = number;
+	long x = num;
 	char alpha[] = {"0123456789abcdef"};
 
 	if (x == 0)

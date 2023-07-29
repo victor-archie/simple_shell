@@ -50,7 +50,7 @@ typedef struct info
 typedef struct builtins
 {
 	char *builtin;
-	int (*function)(data_of_program *data);
+	int (*function)(program_data *data);
 } builtins;
 
 
@@ -147,7 +147,7 @@ int builtin_exit(program_data *data);
 int builtin_cd(program_data *data);
 
 /* set the work directory */
-int set_work_dir(program_data *data, char *new_dir);
+int set_work_directory(program_data *data, char *new_dir);
 
 /* show help information */
 int builtin_help(program_data *data);
@@ -235,7 +235,7 @@ int print_alias(program_data *data, char *alias);
 
 char *get_alias(program_data *data, char *alias);
 
-int set_alias(char *alias_string, ptogram_data *data);
+int set_alias(char *alias_string, program_data *data);
 
 
 #endif /* SHELL_H */

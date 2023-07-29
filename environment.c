@@ -19,7 +19,7 @@ char *_getkey(char *key, program_data *data)
 
 	for (i = 0; data->env[i]; i++)
 	{/* Iterates through the environ and check for coincidence of the vame */
-		if (_strcmp(key, data->env[i], key_leng) &&
+		if (_strcmp(key, data->env[i], key_len) &&
 		 data->env[i][key_len] == '=')
 		{/* returns the value of the key NAME=  when find it*/
 			return (data->env[i] + key_len + 1);
@@ -87,7 +87,7 @@ int _remove_key(char *key, program_data *data)
 		return (0);
 
 	/* obtains the leng of the variable requested */
-	key_len = _str_len(key);
+	key_len = _strlen(key);
 
 	for (i = 0; data->env[i]; i++)
 	{/* iterates through the environ and checks for coincidences */

@@ -21,7 +21,7 @@ int main(int argc, char *argv[], char *env[])
 		prompt = PROMPT_MSG;
 	}
 	errno = 0;
-	sisifo(prompt, data);
+	loop(prompt, data);
 	return (0);
 }
 
@@ -59,10 +59,10 @@ void initialize_data(program_data *data, int argc, char *argv[], char **env)
 		data->file_descriptor = open(argv[1], O_RDONLY);
 		if (data->file_descriptor == -1)
 		{
-			_printe(data->program_name);
-			_printe(": 0: Can't open ");
-			_printe(argv[1]);
-			_printe("\n");
+			_printerr(data->program_name);
+			_printerr(": 0: Can't open ");
+			_printerr(argv[1]);
+			_printerr("\n");
 			exit(127);
 		}
 	}
@@ -106,15 +106,15 @@ void loop(char *prompt, program_data *data)
 		if (strn_len >= 1)
 		{
 			expand_alias(data);
-			expand_variables(data);
+			expand_var(data);
 			tokenize(data);
 			if (data->tokens[0])
 			{ /* if a text is given to prompt, execute */
-				error_code = execute(data);
+				error_code = _execute(data);
 				if (error_code != 0)
 					_print_error(error_code, data);
 			}
-			free_recurrent_data(data);
+			free_recurring_data(data);
 		}
 	}
 }

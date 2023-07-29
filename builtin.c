@@ -126,7 +126,7 @@ int builtin_help(program_data *data)
 	{
 		/*print the length of string */
 		len = _strlen(data->tokens[1]);
-		if (_strcmpe(data->tokens[1], msg[i], len))
+		if (_strcmp(data->tokens[1], msg[i], len))
 		{
 			_print(msg[i] + len + 1);
 			return (1);

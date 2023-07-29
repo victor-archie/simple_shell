@@ -34,7 +34,7 @@ int _print_error(int errorcode, program_data *data)
 {
 	char num_as_string[10] = {'\0'};
 
-	long_to_string((long) data->exec_counter, num_as_string, 10);
+	num_to_string((long) data->exec_counter, num_as_string, 10);
 
 	if (errorcode == 2 || errorcode == 3)
 	{
@@ -47,14 +47,14 @@ int _print_error(int errorcode, program_data *data)
 			_printerr(": Illegal number: ");
 		else
 			_printerr(": can't cd to ");
-		_printe(rrdata->tokens[1]);
+		_printerr(data->tokens[1]);
 		_printerr("\n");
 	}
 	else if (errorcode == 127)
 	{
 		_printerr(data->program_name);
 		_printerr(": ");
-		_printerr(n_as_string);
+		_printerr(num_as_string);
 		_printerr(": ");
 		_printerr(data->command_name);
 		_printerr(": not found\n");
@@ -63,7 +63,7 @@ int _print_error(int errorcode, program_data *data)
 	{
 		_printerr(data->program_name);
 		_printerr(": ");
-		_printerr(n_as_string);
+		_printerr(num_as_string);
 		_printerr(": ");
 		_printerr(data->command_name);
 		_printerr(": Permission denied\n");

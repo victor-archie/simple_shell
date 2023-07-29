@@ -75,7 +75,7 @@ int builtin_set_env(program_data *data)
  * @data: struct for the program's data'
  * Return: ..
  */
-int builtin_unset_env(data_of_program *data)
+int builtin_unset_env(program_data *data)
 {
 	/* validate args */
 	if (data->tokens[1] == NULL)

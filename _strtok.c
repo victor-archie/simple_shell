@@ -15,7 +15,7 @@ char *_strtok(char *line, char *delim)
 		str = line;
 	for (; *str != '\0'; str++)
 	{
-		for (n = 0; delim[j] != '\0'; n++)
+		for (n = 0; delim[n] != '\0'; n++)
 		{
 			if (*str == delim[n])
 			break;

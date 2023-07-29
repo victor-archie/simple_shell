@@ -12,7 +12,7 @@ int _strlen(char *string)
 	if (string == NULL)
 		return (0);
 
-	while (string[l+] != '\0')
+	while (string[l++] != '\0')
 	{
 	}
 	return (--l);
@@ -95,7 +95,7 @@ int _strcmp(char *string1, char *string2, int number)
  *
  * Return: pointer to the array
  */
-char *str_concat(char *string1, char *string2)
+char *_strcat(char *string1, char *string2)
 {
 	char *dest;
 	int len1 = 0, len2 = 0;

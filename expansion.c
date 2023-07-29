@@ -37,13 +37,13 @@ void expand_var(program_data *data)
 		{
 			for (n = 1; line[i + n] && line[i + n] != ' '; n++)
 				expansion[n - 1] = line[i + n];
-			tmp = env_get_key(expansion, data);
+			tmp = _getkey(expansion, data);
 			line[i] = '\0', expansion[0] = '\0';
 			buffer_add(expansion, line + i + n);
 			tmp ? buffer_add(line, tmp) : 1;
 			buffer_add(line, expansion);
 		}
-	if (!str_compare(data->input_line, line, 0))
+	if (!_strcmp(data->input_line, line, 0))
 	{
 		free(data->input_line);
 		data->input_line = _strdup(line);
