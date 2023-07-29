@@ -231,11 +231,11 @@ int count_characters(char *str, char *character);
 
 /*======== alias_management.c ========*/
 
-int print_alias(data_of_program *data, char *alias);
+int print_alias(program_data *data, char *alias);
 
-char *get_alias(data_of_program *data, char *alias);
+char *get_alias(program_data *data, char *alias);
 
-int set_alias(char *alias_string, data_of_program *data);
+int set_alias(char *alias_string, ptogram_data *data);
 
 
 #endif /* SHELL_H */
