@@ -1,122 +1,47 @@
 #include "shell.h"
-
 /**
- * find_path - to find path of the command
- * @cmd: command
- * Return: path
+ * _execute - execute a command with its entire path variables.
+ * @data: a pointer to the program's data
+ * Return: If sucess returns zero, otherwise, return -1.
  */
-
-char *find_path(char *cmd)
+int _execute(program_data *data)
 {
-	char *path = _strdup(_getenv("PATH"));
-	char *val, *dir;
-	char *ful_path;
-	int length;
+	int val = 0, status;
+	pid_t pidd;
 
-	_strtok(path, "=");
-	val = _strtok(NULL, "=");
+	/* check for program in built ins */
+	val = builtins_list(data);
+	if (val != -1)/* if program was found in built ins */
+		return (val);
 
-	dir = _strtok(val, ":");
 
-	while (dir)
+	val = find_program(data);
+	if (val)
 	{
-		length = (_strlen(cmd) + _strlen(dir) + 2);
-
-		ful_path = malloc(length * sizeof(char));
-		if (ful_path == NULL)
-			exit(EXIT_FAILURE);
-
-		_strcpy(ful_path, dir);
-		_strcat(ful_path, "/");
-		_strcat(ful_path, cmd);
-
-		if (access(ful_path, F_OK) == 0)
-		{
-			free(path);
-			return (ful_path);
-		}
-
-		free(ful_path);
-
-		dir = _strtok(NULL, ":");
-	}
-
-	free(path);
-	return (NULL);
-}
-
-/**
- * execute - execute command passed to program
- *
- * Return: no return value
- */
-
-
-void execute(void)
-{
-	pid_t pid;
-	int stat;
-	char **tokens = NULL;
-
-	pid = fork();
-
-	if (pid == -1)
-	{
-		exit(errno);
-	}
-	if (pid == 0)
-	{
-		execve(tokens[0], tokens, environ);
-		exit(1);
-	}
-
-	if (pid > 0)
-	{
-		waitpid(pid, &stat, WUNTRACED);
-
-		if (WIFEXITED(stat))
-		{
-			errno = WEXITSTATUS(stat);
-		}
-	}
-}
-
-/**
- * execute_binary - executes a binary command
- *
- * Return: 1 on success
- */
-
-
-int execute_binary(void)
-{
-	char **tokens = NULL;
-	char *cmd = tokens[0];
-	char *path;
-
-	if (cmd[0] == '/' || cmd[0] == '.')
-	{
-		if (access(cmd, F_OK) != 0 || access
-				(cmd, X_OK) != 0)
-		{
-			errno = 127;
-			return (-1);
-		}
+		return (val);
 	}
 	else
 	{
-		path = find_path(cmd);
-
-		if (path == NULL)
+		pidd = fork();
+		if (pidd == -1)
 		{
-			errno = 127;
-			return (-1);
+			perror(data->command_name);
+			exit(EXIT_FAILURE);
 		}
-
-		free(tokens[0]);
-		tokens[0] = path;
+		if (pidd == 0)
+		{/* I am the child process, I execute the program*/
+			val = execve(data->tokens[0], data->tokens, data->env);
+			if (val == -1) /* if error when execve*/
+				perror(data->command_name), exit(EXIT_FAILURE);
+		}
+		else
+		{/* I am the father*/
+			wait(&status);
+			if (WIFEXITED(status))
+				errno = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				errno = 128 + WTERMSIG(status);
+		}
 	}
-
-	execute();
 	return (0);
 }

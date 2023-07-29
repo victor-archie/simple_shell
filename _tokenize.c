@@ -1,28 +1,41 @@
 #include "shell.h"
-
 /**
- * _tokenize - splits an array of strings into tokens
- *
- * Return - void
+ * tokenize - this function separate the string using a designed delimiter
+ * @data: a pointer to the program's data
+ * Return: an array of the different parts of the string
  */
-
-void _tokenize(void)
+void tokenize(program_data *data)
 {
-	char **_token;
-	char *token;
-	int id = 0;
+	char *delim = " \t";
+	int i, j, counter = 2, len;
 
-	_token = malloc(32 * sizeof(char *));
-	if (_token == NULL)
-		exit(1);
-
-	token = _strtok(cur_cmdline, " ");
-
-	while (token)
+	len = _strlen(data->input_line);
+	if (len)
 	{
-		_token[id++] = _strdup(token);
-		token = _strtok(NULL, " ");
+		if (data->input_line[len - 1] == '\n')
+			data->input_line[len - 1] = '\0';
 	}
 
-	tokens = _token;
+	for (i = 0; data->input_line[i]; i++)
+	{
+		for (j = 0; delim[j]; j++)
+		{
+			if (data->input_line[i] == delim[j])
+				counter++;
+		}
+	}
+
+	data->tokens = malloc(counter * sizeof(char *));
+	if (data->tokens == NULL)
+	{
+		perror(data->program_name);
+		exit(errno);
+	}
+	i = 0;
+	data->tokens[i] = _strdup(_strtok(data->input_line, delim));
+	data->command_name = _strdup(data->tokens[0]);
+	while (data->tokens[i++])
+	{
+		data->tokens[i] = _strdup(_strtok(NULL, delim));
+	}
 }

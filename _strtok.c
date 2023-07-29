@@ -1,47 +1,42 @@
 #include "shell.h"
-
 /**
- * _strtpk - token a string into token (strtok)
- * @delim: delimiter
- * @str: string
- * Return: pointer to the next token or NULL
- */
-
-char *_strtok(char *str, char *delim)
+ * _strtok - separates strings into tokens
+ * @line: It´s pointer to array we receive in getline.
+ * @delim: It´s characters we mark off string in parts.
+ * Return: A pointer to the created token
+*/
+char *_strtok(char *line, char *delim)
 {
-	static char *f;
-	int a;
-	char *token;
+	int n;
+	static char *str;
+	char *strcpy;
 
-	if (str != NULL)
-		f = str;
-
-	for (; *f != '\0'; f++)
+	if (line != NULL)
+		str = line;
+	for (; *str != '\0'; str++)
 	{
-		for (a = 0; delim[a] != '\0'; a++)
+		for (n = 0; delim[j] != '\0'; n++)
 		{
-			if (*f == delim[a])
-				break;
+			if (*str == delim[n])
+			break;
 		}
-		if (delim[a] == '\0')
+		if (delim[n] == '\0')
 			break;
 	}
-
-	token = f;
-	if (*token == '\0')
+	strcpy = str;
+	if (*strcpy == '\0')
 		return (NULL);
-
-	for (; *f != '\0'; f++)
+	for (; *str != '\0'; str++)
 	{
-		for (a = 0; delim[a] != '\0'; a++)
+		for (n = 0; delim[n] != '\0'; n++)
 		{
-			if (*f == delim[a])
+			if (*str == delim[n])
 			{
-				*f = '\0';
-				f++;
-				return (token);
+				*str = '\0';
+				str++;
+				return (strcpy);
 			}
 		}
 	}
-	return (token);
+	return (strcpy);
 }
