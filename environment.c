@@ -35,6 +35,7 @@ char *_getenv(const char *key)
 int _setenv(char *name, char *value, int overwrite)
 {
 	int i, name_len = 0, new_key = 1;
+	char *env_var;
 
 	if (name == NULL || value == NULL)
 		return (1);
@@ -43,7 +44,7 @@ int _setenv(char *name, char *value, int overwrite)
 
 	for (i = 0; environ[i]; i++)
 	{
-		if (_strcmp(name, environ[i], name_len) &&
+		if (_strncmp(name, environ[i], name_len) &&
 				environ[i][name_len] == '=')
 		{
 			if (!overwrite)
@@ -55,7 +56,7 @@ int _setenv(char *name, char *value, int overwrite)
 		}
 	}
 
-	char *env_var = _strcat(_strdup(name), "=");
+	env_var = _strcat(_strdup(name), "=");
 
 	env_var = _strcat(env_var, value);
 

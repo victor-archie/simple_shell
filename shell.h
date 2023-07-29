@@ -1,5 +1,5 @@
-#ifndef _SHELL_H
-#define _SHELL_H
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <errno.h>
 #include <stdio.h>
@@ -25,18 +25,22 @@ typedef struct builtin
 
 extern int errno;
 extern char **environ;
+extern int execution_counter;
+extern char *cur_cmdline;
+extern char **tokens;
+extern char *program_name;
 
 void initialize_all_program_data(void);
 
-void runner(char *prompt);
-void tokenize(void);
+void loop(char *prompt);
+void _tokenize(void);
 
 char *_strtok(char *str, char *delim);
 int execute_binary(void);
 char *_getenv(const char *key);
-int _strcmp(char *s1, char *s2);
+int _strcmp(const char *s1, const char *s2);
 int isatty(int fd);
-char *_strcpy(const char *dest, const char *src);
+char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
 char *_strdup(const char *str);
 size_t _strlen(const char *string);
@@ -50,9 +54,6 @@ ssize_t _getline(void);
 
 void free_pointers_array(char **ptr);
 
-extern int execution_counter;
-extern char *cur_cmdline;
-extern char **tokens;
-extern char *program_name;
+
 
 #endif

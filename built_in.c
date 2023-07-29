@@ -7,9 +7,11 @@
 
 int builtin_exit(void)
 {
-	int i, stat = 0;
+	int stat = 0;
+	char **tokens = NULL;
+	char *cur_cmdline = NULL;
 
-	if (tokens[i] != NULL)
+	if (tokens[1] != NULL)
 		stat = _atoi(tokens[1]);
 
 	free_pointers_array(tokens);
@@ -48,6 +50,7 @@ int builtin_env(void)
 int builtin_cd(void)
 {
 	char dir[1024] = {'\0'};
+	char **tokens = NULL;
 
 	if (tokens[1] == NULL)
 	{
@@ -74,6 +77,8 @@ int builtin_cd(void)
 
 int is_builtin(void)
 {
+	char **tokens = NULL;
+
 	builtin_action actions[] = {
 		{"exit", builtin_exit},
 		{"env", builtin_env},
@@ -87,7 +92,7 @@ int is_builtin(void)
 	{
 		if (_strcmp(actions[j].name, tokens[0]) == 0)
 		{
-			return (actions[j].actions());
+			return (actions[j].action());
 		}
 	}
 

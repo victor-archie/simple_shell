@@ -5,8 +5,9 @@
  * Return: 1 on success and -1 on failure
  */
 
-ssize_t _getline(void);
+ssize_t _getline(void)
 {
+	char *cur_cmdline = NULL;
 	char cmdline[1024] = {'\0'};
 
 	static char *cmdlines[64] = {NULL};
@@ -35,7 +36,7 @@ ssize_t _getline(void);
 		}
 	}
 
-	cur_cmdline - cmdlines[0];
+	cur_cmdline = cmdlines[0];
 
 	a = 0;
 
@@ -44,7 +45,6 @@ ssize_t _getline(void);
 
 	if (cur_cmdline)
 		return (_strlen(cur_cmdline));
-	if (cur_cmdfile)
-		return (strlen(cur_cmdfile));
+
 	return (0);
 }

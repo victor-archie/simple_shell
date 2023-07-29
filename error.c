@@ -62,6 +62,10 @@ void print_error(char *msg)
 
 void print_error_message(void)
 {
+	char **tokens = NULL;
+	char *program_name = NULL;
+	int execution_counter = 0;
+
 	char *err_no = num_to_str(execution_counter);
 
 	print_error(program_name);

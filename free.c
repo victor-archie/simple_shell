@@ -10,7 +10,7 @@ void free_pointers_array(char **ptr)
 {
 	int p = 0;
 
-	while (ptr[i])
-		free(ptr[i++]);
+	while (ptr[p])
+		free(ptr[p++]);
 	free(ptr);
 }

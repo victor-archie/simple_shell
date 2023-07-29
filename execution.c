@@ -56,6 +56,7 @@ void execute(void)
 {
 	pid_t pid;
 	int stat;
+	char **tokens = NULL;
 
 	pid = fork();
 
@@ -89,12 +90,13 @@ void execute(void)
 
 int execute_binary(void)
 {
+	char **tokens = NULL;
 	char *cmd = tokens[0];
 	char *path;
 
 	if (cmd[0] == '/' || cmd[0] == '.')
 	{
-		if (access(cmd, F_0K) != 0 || access
+		if (access(cmd, F_OK) != 0 || access
 				(cmd, X_OK) != 0)
 		{
 			errno = 127;
